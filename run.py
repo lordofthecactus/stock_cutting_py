@@ -1,4 +1,4 @@
-from stock_cutting_problem import *
+from stock_cutting import *
 
 # stocks = [Stock(400,4), Stock(260,1)]
 # demands = [Demand(55,10), Demand(43,9), Demand(19,17), Demand(62,2)]
@@ -11,6 +11,8 @@ from stock_cutting_problem import *
 # stocks = [Stock(5600, 100)]
 # demands =[Demand(1380,22),Demand(1520,25),Demand(1560,12),Demand(1710,14),Demand(1820,18),Demand(1880, 18),Demand(1930,20),Demand(2000,10),Demand(2050,12),Demand(2100,14),Demand(2140,16),Demand(2150,18),Demand(2200,20)]
 
+stocks = [Stock(57,21)]
+demands = [Demand(18, 35), Demand(21, 9), Demand(27,5)]
 
 initial_patterns = InitialPatternsFactory.get(stocks, demands)
 oc = OptimalCutting(stocks, demands)

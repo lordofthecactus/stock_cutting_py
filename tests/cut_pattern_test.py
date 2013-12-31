@@ -1,11 +1,11 @@
 import unittest
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
-from stock_cutting_problem import *
+from stock_cutting import *
 
 
 class TestCutPattern(unittest.TestCase):
-    
+
     def setUp(self):
         self.demands = [Demand(1,10)]
         self.stock = Stock(10,1)

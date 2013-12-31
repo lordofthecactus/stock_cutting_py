@@ -2,7 +2,7 @@ import unittest
 import inspect
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
-from stock_cutting_problem import *
+from stock_cutting import *
 
 
 class TestGlpkSolver(unittest.TestCase):
