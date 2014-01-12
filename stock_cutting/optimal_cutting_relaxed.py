@@ -4,15 +4,16 @@ from glpk_sub_setup import *
 from glpk_solver import *
 from cut_pattern import *
 from initial_patterns_factory import *
+from optimal_cutting import *
 
-class OptimalCutting:
+class OptimalCuttingRelaxed(OptimalCutting):
   def __init__(self, stocks, demands):
     self.stocks = stocks
     self.demands = demands
     self.patterns = InitialPatternsFactory.get(self.stocks, self.demands)
 
   def optimize_patterns(self, patterns, stocks, demands):
-    setup = GlpkMasterSetup(patterns, stocks, demands)
+    setup = GlpkMasterSetupRelaxed(patterns, stocks, demands)
     solver = GlpkSolver(setup)
     lp = solver.solve()
     duals = solver.duals
@@ -30,7 +31,7 @@ class OptimalCutting:
     return self.get_pattern_from_lp(lp), lp.obj.value
 
   def iterate(self):
-    lp, relaxed_value ,deltas, lamdas = self.optimize_patterns(self.patterns, self.stocks, self.demands)
+    lp, relaxed_value, deltas, lamdas = self.optimize_patterns(self.patterns, self.stocks, self.demands)
     self.deltas = deltas
     self.lamdas = lamdas
     new_pattern, value_of_pattern = self.generate_pattern(self.stocks, self.deltas, self.demands, self.lamdas)
