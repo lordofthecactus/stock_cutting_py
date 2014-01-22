@@ -17,6 +17,7 @@ class OptimalCuttingRelaxed(OptimalCutting):
     solver = GlpkSolver(setup)
     lp = solver.solve()
     duals = solver.duals
+    print "master problem value: %g" % lp.obj.value
     print "duals:"
     print '; '.join('%g' % (d) for d in duals)
     lamdas = duals[0:len(self.demands)]
@@ -50,9 +51,11 @@ class OptimalCuttingRelaxed(OptimalCutting):
     return CutPattern(stock, self.demands, quantities)
 
   def solve(self):
-    lp, rv = self.iterate()
-    print "%g" % rv
-    while(rv < -.0001):
-      lp, rv = self.iterate()
-      print "%g" % rv
+    lp, rv_new = self.iterate()
+    rv_prev = rv_new - 1
+    print "%g" % rv_new
+    while(rv_prev - rv_new < -.0001):
+      rv_prev = rv_new
+      lp, rv_new = self.iterate()
+      print "%g" % rv_new
     return lp, self.patterns
