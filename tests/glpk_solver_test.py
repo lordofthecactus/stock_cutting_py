@@ -40,5 +40,27 @@ class TestGlpkSolver(unittest.TestCase):
         print 'Status %s' % lp.status
         self.assertEqual(lp.status, 'opt')
 
+    def test_solve_sub_problem2(self):
+        stocks = [Stock(91, 200)]
+        deltas = [0]
+        demands = [Demand(25.5, 78), Demand(22.5, 40), Demand(20, 30), Demand(15, 30)]
+        patterns = InitialPatternsFactory.highest_get(stocks, demands)
+        setup = GlpkMasterSetupRelaxed(patterns, stocks, demands)
+        solver = GlpkSolver(setup)
+        lp = solver.solve()
+        print 'Status %s' % lp.status
+        print '; '.join('%s = %g' % (c.name, c.primal) for c in lp.cols)
+        print '; '.join('%g' % (d) for d in solver.duals)
+
+        self.assertEqual(lp.status, 'opt')
+        lamdas = [1.0/3, 1.0/4, 1.0/4, 1.0/6]
+        setup = GlpkSubSetupRelaxed(stocks, deltas, demands, lamdas)
+        solver = GlpkSolver(setup)
+        lp = solver.solve()
+        print 'Status %s' % lp.status
+        print '; '.join('%s = %g' % (c.name, c.primal) for c in lp.cols)
+        self.assertEqual(lp.status, 'opt')
+
+
 if __name__ == '__main__':
     unittest.main()

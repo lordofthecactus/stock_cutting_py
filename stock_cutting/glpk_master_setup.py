@@ -32,7 +32,7 @@ class GlpkMasterSetup:
     return [(0.0, None)]*len(self.cut_patterns)
 
   def get_leftovers(self):
-    return [cut_pattern.stock.length + cut_pattern.leftover for cut_pattern in self.cut_patterns]
+    return [cut_pattern.leftover for cut_pattern in self.cut_patterns]
 
   def get_matrix(self):
     return self.get_demand_matrix() + self.get_availability_matrix()

@@ -1,6 +1,7 @@
 from cut_pattern import *
 from optimal_cutting import *
 from optimal_cutting_relaxed import *
+from optimal_cutting_brute_force import *
 from demand import *
 from stock import *
 from glpk_master_setup import *
