@@ -2,4 +2,4 @@ from setuptools import setup
 setup(name='stock_cutting',
   version='0.4.0',
   packages=['stock_cutting'],
-  install_requires=['glpk==0.4'])
+  install_requires=['glpk==0.3'])
