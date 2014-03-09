@@ -8,8 +8,8 @@ from stock_cutting import *
 # stocks = [Stock(218, 100000)]
 # demands = [Demand(81, 44), Demand(70, 3), Demand(68,48)]
 
-stocks = [Stock(5600, 100)]
-demands =[Demand(1380,22),Demand(1520,25),Demand(1560,12),Demand(1710,14),Demand(1820,18),Demand(1880, 18),Demand(1930,20),Demand(2000,10),Demand(2050,12),Demand(2100,14),Demand(2140,16),Demand(2150,18),Demand(2200,20)]
+# stocks = [Stock(5600, 100)]
+# demands =[Demand(1380,22),Demand(1520,25),Demand(1560,12),Demand(1710,14),Demand(1820,18),Demand(1880, 18),Demand(1930,20),Demand(2000,10),Demand(2050,12),Demand(2100,14),Demand(2140,16),Demand(2150,18),Demand(2200,20)]
 
 #stocks = [Stock(57,21)]
 #demands = [Demand(18, 35), Demand(21, 9), Demand(27,5)]
@@ -23,6 +23,9 @@ demands =[Demand(1380,22),Demand(1520,25),Demand(1560,12),Demand(1710,14),Demand
 # stocks = [Stock(91, 200)]
 # demands = [Demand(25.5, 78), Demand(22.5, 40), Demand(20, 30), Demand(15, 30)]
 
+stocks = [Stock(4, 1), Stock(10, 1)]
+demands = [Demand(2, 5), Demand(1,3)]
+
 initial_patterns = InitialPatternsFactory.all_patterns(stocks, demands)
 
 oc = OptimalCuttingBruteForce(stocks, demands)
@@ -31,7 +34,7 @@ print 'Z = %g;' % lp.obj.value
 print '; '.join('%s = %g' % (c.name, c.primal) for c in lp.cols)
 print 'Status %s' % lp.status
 
-patterns.pop()
+# patterns.pop()
 used = 0
 
 for index, pattern in enumerate(patterns):

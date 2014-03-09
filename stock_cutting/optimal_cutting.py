@@ -54,4 +54,6 @@ class OptimalCutting:
     while(rv < -.0001):
       lp, rv = self.iterate()
       print "%g" % rv
+
+    self.patterns.pop()
     return lp, self.patterns
